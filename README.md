@@ -73,6 +73,8 @@ strategies similar":
 
 ## Headline result
 
+![UMAP of strategy population](figures/fig_umap_metrics_ALL.png)
+
 On the **10 deepest-WFO assets** (ETH, BTC, LTC, TRX, XRP, LINK, ZEC,
 DOGE, BCH, AVAX), 100,000-strategy stratified subsample, last-K=6
 windows feature, n_trades ≥ 20 gate, 6.87% robust):
