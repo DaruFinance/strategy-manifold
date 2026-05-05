@@ -1,0 +1,23 @@
+{
+  "mode": "data",
+  "feature": "metrics",
+  "asset": "ALL",
+  "n_loaded": 100000,
+  "robust_rate": 0.06869,
+  "n": 100000,
+  "d": 90,
+  "pca_var_pc1": 16.62119954288566,
+  "pca_var_pc2": 10.048269527002855,
+  "connectivity_umap": {
+    "modularity_proxy": 0.902514,
+    "n_components_robust": 1229,
+    "n_robust": 6869,
+    "n_fragile": 93131
+  },
+  "connectivity_pca": {
+    "modularity_proxy": 0.9106586666666666,
+    "n_components_robust": 938,
+    "n_robust": 6869,
+    "n_fragile": 93131
+  }
+}
