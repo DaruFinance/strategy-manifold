@@ -103,6 +103,13 @@ The pattern is robust to scale and asset selection:
 Scaling up keeps the per-island count in the 5–8 range — robust strategies
 are not a single connected manifold at any scale we've checked.
 
+The cluster size distribution explains the structure: there's one large
+component (~2,400 robust strategies) but it covers only ~35% of the
+robust population — the remaining 65% is fragmented into ~1,200 smaller
+clusters, most of size 1–10.
+
+![Robust-cluster size distribution](figures/fig_cluster_sizes.png)
+
 ## Usage
 
 ```bash
