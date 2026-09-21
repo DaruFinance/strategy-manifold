@@ -17,8 +17,9 @@ sanity. A k-NN connectivity test on the embedding labels each strategy as
 form one connected component, isolated islands, or are uniformly mixed in.
 
 Usage:
-    python scripts/manifold.py                      # synthetic demo
-    python scripts/manifold.py --from-data --feature metrics --asset ALGO_30m_6W_1MetaW
+    python scripts/manifold.py --synthetic          # synthetic demo
+    python scripts/manifold.py --parquet-root /path/to/strategies \\
+        --feature metrics --asset ALGO_30m_6W_1MetaW
 """
 from __future__ import annotations
 
@@ -307,7 +308,9 @@ def run_one(X: np.ndarray, meta: pd.DataFrame, labels: np.ndarray,
 
 def main():
     ap = argparse.ArgumentParser()
-    ap.add_argument("--parquet-root", default="/mnt/d/strategies_parquet/strategies")
+    ap.add_argument("--parquet-root",
+                    default=os.environ.get("STRATEGY_PARQUET_ROOT"),
+                    help="strategies/ Parquet root (or set STRATEGY_PARQUET_ROOT)")
     ap.add_argument("--asset", default="",
                     help="single asset to filter to (default: all assets)")
     ap.add_argument("--assets", nargs="+", default=None,
@@ -321,6 +324,9 @@ def main():
                     help="(rare) three-blob synthetic demo; only for "
                          "testing the analysis machinery.")
     args = ap.parse_args()
+    if not args.synthetic and not args.parquet_root:
+        ap.error("pass --parquet-root or set STRATEGY_PARQUET_ROOT "
+                 "(or use --synthetic)")
 
     summary: dict = {"mode": "synthetic" if args.synthetic else "data",
                      "feature": args.feature}

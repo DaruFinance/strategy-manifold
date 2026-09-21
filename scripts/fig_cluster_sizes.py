@@ -1,5 +1,6 @@
 """Histogram of robust-cluster sizes — visualises the 'fragmented edge' result."""
 from pathlib import Path
+import os
 import sys
 
 import numpy as np
@@ -17,10 +18,13 @@ ASSETS_10 = ["ETH_30m_28W", "BTC_30m_27W", "LTC_30m_27W", "TRX_30m_25W",
              "XRP_30M_25W_new", "LINK_30M_23W_new", "ZEC_30m_22W",
              "DOGE_30m_21W", "BCH_30m_20W", "AVAX_30m_17W"]
 
+PARQUET_ROOT = os.environ.get("STRATEGY_PARQUET_ROOT")
+if not PARQUET_ROOT:
+    sys.exit("set STRATEGY_PARQUET_ROOT to the strategies/ Parquet root")
+
 print("[fig_cluster_sizes] loading metrics...")
-X, meta = feature_metrics("/mnt/d/strategies_parquet/strategies",
-                          assets=ASSETS_10)
-labels = robust_labels("/mnt/d/strategies_parquet/strategies", meta).to_numpy(bool)
+X, meta = feature_metrics(PARQUET_ROOT, assets=ASSETS_10)
+labels = robust_labels(PARQUET_ROOT, meta).to_numpy(bool)
 print(f"X.shape={X.shape}, robust_rate={labels.mean()*100:.2f}%")
 if X.shape[0] > 100_000:
     rng = np.random.default_rng(42)

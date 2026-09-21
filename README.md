@@ -2,11 +2,11 @@
 
 **Geometry of strategy space.**
 
-> Companion repository to the M-series of reference implementations on
-> [daru.finance](https://daru.finance). Inputs come from the
+> The code for [PCA + UMAP geometry of the strategy population](https://daru.finance/projects/strategy-manifold),
+> one of the M-series models Daniel Gatto publishes on [daru.finance](https://daru.finance).
+> Inputs come from the
 > [`quant-research-framework-rs`](https://github.com/DaruFinance/quant-research-framework-rs)
-> walk-forward backtester, processed through
-> [`strategy-generalization-analysis`](https://github.com/DaruFinance/strategy-generalization-analysis).
+> walk-forward backtester.
 
 ## What this is
 
@@ -35,11 +35,11 @@ find, or a constellation of isolated optima reachable only by luck.
 git clone https://github.com/DaruFinance/strategy-manifold
 cd strategy-manifold
 pip install -e .
-python scripts/manifold.py                    # default: full real corpus
+python scripts/manifold.py --parquet-root /path/to/strategies
 ```
 
-The default reads the strategies/ Parquet substrate at
-`/mnt/d/strategies_parquet/strategies` and embeds *all* assets (last-K=6
+Point `--parquet-root` (or the `STRATEGY_PARQUET_ROOT` environment
+variable) at the strategies/ Parquet substrate. The script embeds *all* assets (last-K=6
 windows per strategy, so 6W and 27W assets share a 90-D feature space).
 For per-asset runs use `--asset ASSET_DIR`. Pass `--subsample N` to fit on
 a stratified subsample (recommended above ~100k strategies for UMAP).
